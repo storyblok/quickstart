@@ -1,0 +1,6 @@
+/node_modules
+/token.js
+/cert.js
+/views/assets/js/scripts.js
+/views/assets/css/
+/views/components/_above_fold_css.liquid

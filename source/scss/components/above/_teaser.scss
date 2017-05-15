@@ -1,0 +1,36 @@
+.teaser {
+  position: relative;
+
+  h1 {
+    margin: 0 0 10px 0;
+  }
+
+  p {
+    margin: 0 0 10px 0;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.teaser__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.teaser__text-i {
+  padding: 30px;
+  background: rgba(255,255,255,0.8);
+
+  @media only screen and (min-width: 481px) {
+    max-width: 500px;
+  }
+}
+

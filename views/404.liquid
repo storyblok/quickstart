@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storyblok - {{ story.name }}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Titillium+Web:200');
+  </style>
+  <link href="{{ 'assets/theme.css' | asset_url }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+  <div class="hello">
+    <h1>Hello (on the 404 page)</h1>
+    <p>A Blueprint Storyblok Theme</p>
+    {% if params._storyblok %}
+    <a href="https://github.com/storyblok/creator-theme" target="_blank">CHECKOUT THE REPOSITORY</a>
+    <span>if you want to edit the template.</span>
+    {% endif %}
+  </div>
+
+
+  {% include story.content.component with blok: story.content, title: story.name, date: story.created_at %}
+
+  <script type="text/javascript" src="{{ 'assets/js/scripts.js' | asset_url }}"></script>
+  <script type="text/javascript" src="//app.storyblok.com/storyblok-latest.js"></script>
+  <script type="text/javascript">
+
+    storyblok.init({
+      accessToken: '{{ public_token }}'
+    });
+
+    storyblok.on('change', function() {
+      location.reload(true);
+    });
+
+    storyblok.pingEditor(function() {
+      if (storyblok.inEditor) {
+        storyblok.enterEditmode();
+      }
+    });
+
+  </script>
+</body>

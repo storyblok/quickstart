@@ -1,0 +1,20 @@
+{
+  "name": "quickstart-theme",
+  "description": "quickstart-theme for storyblok",
+  "private": false,
+  "version": "0.0.0",
+  "devDependencies": {
+    "babel-core": "^6.20.0",
+    "babel-loader": "^6.4.0",
+    "babel-preset-es2015": "^6.18.0",
+    "browser-sync": "^2.18.5",
+    "gulp-webpack": "^1.5.0",
+    "gulp": "^3.9.1",
+    "gulp-blok": "^1.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sass-glob": "^1.0.8",
+    "gulp-watch": "^4.3.11",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

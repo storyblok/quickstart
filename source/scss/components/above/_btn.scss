@@ -1,0 +1,13 @@
+.btn {
+  display: inline-block;
+  background: $brand-color;
+  padding: 15px 25px;
+  color: #FFF;
+  text-decoration: none;
+  border-radius: 3px;
+  line-height: 1;
+
+  &:hover {
+    background: darken($brand-color, 10);
+  }
+}
