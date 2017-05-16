@@ -5,7 +5,7 @@
 <br><br>
 
 ## Visit it here:
-https://speed.me.storyblok.com/
+https://ac0e600a.me.storyblok.com/
 
 ## What is a storyblok theme
 If you want a hosting with our Rendering Service so you won't have to setup a server on your own you can directly choose from one of our themes.
