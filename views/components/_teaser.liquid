@@ -1,7 +1,38 @@
-<div class="teaser">
+<div class="quickstart__teaser">
   <div class="container container--small container--padded">
-    <h2>
-      Teaser
-    </h2>
+
+    <!--
+    The _editable attribute makes the next
+    DOM-element clickable so the sidebar can
+    show the right component.
+    -->
+    {{ blok._editable }}
+    <div class="quickstart__inner-teaser">
+      <h3>
+        You have completed the tour!
+      </h3>
+      <svg class="icon"><use xlink:href="#icon-congrats"></use></svg>
+      <h2>
+        <!--
+        You can access every attribute you
+        define in the schema in the blok variable
+        -->
+        {% if blok.headline == blank %}
+          Yeah!
+        {% else %}
+          {{ blok.headline }}
+        {% endif %}
+      </h2>
+      <p>
+        {% if blok.headline == blank %}
+          How editing the headline works? It's easy just click on this component,<br>
+          insert some text in the sidebar and click save.
+        {% endif %}
+      </p>
+      <h3>
+        Open the file <code>views/components/_teaser.liquid</code> to study the code.
+      </h3>
+    </div>
+
   </div>
 </div>

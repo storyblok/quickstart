@@ -1,13 +1,9 @@
 .header {
-  padding: 50px 20px;
+  padding: 30px 20px;
   position: relative;
   z-index: 1;
-  background: #29abe2;
   color: #FFF;
-  background: -moz-linear-gradient(45deg, #29abe2 0%, #7ac943 100%);
-  background: -webkit-linear-gradient(45deg, #29abe2 0%, #7ac943 100%);
-  background: linear-gradient(45deg, #29abe2 0%, #7ac943 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#29abe2', endColorstr='#7ac943',GradientType=1);
+  background: #29abe2;
 }
 
 .header__container {

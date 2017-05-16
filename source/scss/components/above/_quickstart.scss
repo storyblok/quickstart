@@ -15,3 +15,33 @@
     }
   }
 }
+
+.quickstart__inner-teaser {
+  padding: 10px 0;
+}
+
+.quickstart__teaser {
+  text-align: center;
+  background: #335169;
+  color: #FFF;
+
+  svg {
+    font-size: 5rem;
+  }
+
+  h2 {
+    margin: 10px 0;
+    font-size: 3rem;
+  }
+
+  h3 {
+    line-height: 1.5;
+  }
+
+  code {
+    font-size: 1rem;
+    background: #000;
+    padding: 2px 5px;
+    display: inline-block;
+  }
+}
