@@ -1,6 +1,10 @@
 .step {
   display: flex;
   margin-bottom: 20px;
+
+  small {
+    color: #b1b1b1;
+  }
 }
 
 .step__number {
@@ -9,7 +13,7 @@
     margin: 0 20px 0 0;
     width: 45px;
     height: 45px;
-    background: #e0e0e0;
+    background: #29abe2;
     border-radius: 50%;
     text-align: center;
     line-height: 45px;
