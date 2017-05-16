@@ -13,11 +13,11 @@ const fs = require('fs')
 const rename = require('gulp-rename')
 
 if (config.blok.domain == 'INSERT_YOUR_DOMAIN') {
-  config.blok.domain = 'hello.me.storyblok.com'
+  config.blok.domain = 'ac0e600a.me.storyblok.com'
 }
 
 if (config.blok.themeId == 'INSERT_SPACE_ID') {
-  config.blok.themeId = '40032'
+  config.blok.themeId = '40288'
 }
 
 gulp.task('deploy', function () {
@@ -72,7 +72,7 @@ gulp.task('scripts', function () {
 
 gulp.task('browsersync', function () {
   browserSync({
-    port: 4200,
+    port: 4440,
     serveStatic: ['./views'],
     proxy: {
       target: 'http://' + config.blok.domain + '/_quickstart?quickstart=' + config.blok.quickstartToken,
