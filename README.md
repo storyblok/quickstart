@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">Creator theme for Storyblok</h1>
+  <h1 align="center">Quickstart for Storyblok</h1>
   <p align="center">A <a href="https://www.storyblok.com" target="_blank">Storyblok</a> theme with liquid and our render service to simply start your website with us.</p>
 </p>
 <br><br>
@@ -12,11 +12,11 @@ If you want a hosting with our Rendering Service so you won't have to setup a se
 Checkout the [theme documentation](https://www.storyblok.com/docs/Rendering-Service/Theme-Documentation) to know more about the template syntax.
 
 ## How can I start with a theme
-The most efficient way to start a storyblok project as a developer would be our [Command Line Interface](https://www.storyblok.com/docs/Guides/command-line-interface).
+The most efficient way to start a storyblok project as a developer would be our [Command Line Interface](https://www.storyblok.com/docs/Guides/command-line-interface). For the Quickstart we even offer an own command.
 
 ```
 npm i storyblok-cli -g
-storyblok
+storyblok quickstart
 ```
 
 and choose your theme. You can of course simply `download` or `clone` this repository as well.
@@ -57,10 +57,6 @@ gulp
 - [Terminology - Introduction](https://www.storyblok.com/docs/terminology/introduction)
 - [Content Delivery API - Introduction](https://www.storyblok.com/docs/Delivery-Api/introduction)
 
-## Local HTTPS / SSL without errors (Mac OS):
-
-1. https://certsimple.com/blog/localhost-ssl-fix
-2. Rename ```_cert.js``` to ```cert.js``` and insert paths to your `key.pem` and `cert.pem`.
 
 <br>
 <br>
