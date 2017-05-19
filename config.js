@@ -8,6 +8,7 @@ module.exports = {
     domain: "INSERT_YOUR_DOMAIN",
     apiKey: require('./token'),
     basePath: "views",
-    quickstartToken: "TEMP_QUICKSTART_TOKEN"
+    quickstartToken: "TEMP_QUICKSTART_TOKEN",
+    enableQuickstartTour: true
   }
 }
