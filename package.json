@@ -3,6 +3,9 @@
   "description": "quickstart-theme for storyblok",
   "private": false,
   "version": "0.0.0",
+  "babel": {
+    "presets": ["es2015"]
+  },
   "devDependencies": {
     "babel-core": "^6.20.0",
     "babel-loader": "^6.4.0",
