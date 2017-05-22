@@ -4,11 +4,12 @@
 module.exports = {
   blok: {
     apiVersion: 2,
-    themeId: "INSERT_SPACE_ID",
-    domain: "INSERT_YOUR_DOMAIN",
+    themeId: 'INSERT_SPACE_ID',
+    domain: 'INSERT_YOUR_DOMAIN',
     apiKey: require('./token'),
-    basePath: "views",
-    quickstartToken: "TEMP_QUICKSTART_TOKEN",
+    basePath: 'views',
+    quickstartToken: 'TEMP_QUICKSTART_TOKEN',
+    environment: 'live',
     enableQuickstartTour: true
   }
 }

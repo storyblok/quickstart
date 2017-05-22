@@ -20,7 +20,14 @@ if (config.blok.themeId == 'INSERT_SPACE_ID') {
   config.blok.themeId = '40288'
 }
 
-gulp.task('deploy', function () {
+gulp.task('deploy:dev', function () {
+  return gulp.src('./views/**/*')
+    .pipe(blok(config.blok))
+})
+
+gulp.task('deploy:live', function () {
+  config.environment = 'live'
+
   return gulp.src('./views/**/*')
     .pipe(blok(config.blok))
 })
@@ -76,11 +83,12 @@ gulp.task('browsersync', function () {
     serveStatic: ['./views'],
     proxy: {
       target: 'http://' + config.blok.domain + '/' + (config.blok.enableQuickstartTour ? '_quickstart?quickstart=' + config.blok.quickstartToken : ''),
-      reqHeaders: function (config) {
+      reqHeaders: function () {
         return {
           'accept-encoding': 'identity',
           'agent': false,
-          'browsersyncblok': true
+          'browsersyncblok': true,
+          'storyblokenv': config.blok.environment
         }
       }
     },
