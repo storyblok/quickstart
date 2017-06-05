@@ -15,7 +15,7 @@ Checkout the [theme documentation](https://www.storyblok.com/docs/Rendering-Serv
 The most efficient way to start a storyblok project as a developer would be our [Command Line Interface](https://www.storyblok.com/docs/Guides/command-line-interface). For the Quickstart we even offer an own command.
 
 ```
-npm i storyblok-cli -g
+npm i storyblok -g
 storyblok quickstart
 ```
 
