@@ -103,8 +103,10 @@ gulp.task('browsersync', function () {
       reload()
     }
   })
-  gulp.watch(['source/scss/components/above/**/*.scss', 'source/scss/components/elements/**/*.scss'], ['styles:above'])
-  gulp.watch('source/scss/components/below/**/*.scss', ['styles:below'])
+
+  gulp.watch(['source/scss/_variables.scss'], ['styles:above', 'styles:below'])
+  gulp.watch(['source/scss/above.scss', 'source/scss/components/above/**/*.scss', 'source/scss/components/elements/**/*.scss'], ['styles:above'])
+  gulp.watch(['source/scss/below.scss','source/scss/components/below/**/*.scss'], ['styles:below'])
   gulp.watch('source/js/**/*.js', ['scripts'])
 })
 
