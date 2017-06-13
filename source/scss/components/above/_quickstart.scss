@@ -1,5 +1,52 @@
 .quickstart {
+  background: linear-gradient(to bottom, #002D54 0%, #006B7F 100%);
+  padding-top: 1px;
 
+  h1 {
+    text-align: center;
+    color: #FFF;
+  }
+
+  h2 {
+    margin: 0 0 6px 0;
+    font-size: 1.4rem;
+  }
+}
+
+.quickstart__btn {
+  display: inline-block;
+  background: $brand-color;
+  padding: 15px 25px;
+  color: #FFF;
+  text-decoration: none;
+  border-radius: 3px;
+  line-height: 1;
+  border: none;
+  font-size: 1rem;
+  font-family: 'Titillium Web', Helvetica, sans-serif;
+  cursor: pointer;
+
+  &:hover {
+    background: darken($brand-color, 10);
+  }
+}
+
+.quickstart__placeholder {
+  height: 50px;
+  border: 1px dashed #FFF;
+  margin: 30px;
+  border-radius: 5px;
+}
+
+.quickstart__bg {
+  background: url('https://a.storyblok.com/f/39898/80d38cf845/puzzle.png') repeat-x;
+}
+
+.quickstart__container {
+  padding: 50px 0;
+  min-height: 100vh;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .quickstart__platforms {
@@ -16,22 +63,23 @@
   }
 }
 
+.quickstart__hint {
+  color: #FFF;
+  text-align: center;
+}
+
 .quickstart__inner-teaser {
   padding: 10px 0;
 }
 
 .quickstart__teaser {
   text-align: center;
-  background: #335169;
-  color: #FFF;
+  background: #FFF;
+  color: #000;
+  margin: 20px;
 
   svg {
     font-size: 5rem;
-  }
-
-  h2 {
-    margin: 10px 0;
-    font-size: 3rem;
   }
 
   h3 {
@@ -41,7 +89,131 @@
   code {
     font-size: 1rem;
     background: #000;
+    color: #FFF;
     padding: 2px 5px;
     display: inline-block;
   }
+}
+
+.quickstart__langc {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.quickstart__lang {
+  display: inline-block;
+  margin-top: 10px;
+  width: 50px;
+  text-align: center;
+  opacity: 0.5;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  span {
+    margin: 5px 0;
+    display: block;
+    color: #000;
+    font-size: 11px;
+  }
+}
+
+.quickstart__t {
+  display: none;
+
+  pre {
+    border-top: 2px solid #CCC;
+    overflow: auto;
+    display: block;
+    white-space: pre;
+    background: #f5f5f5;
+    font: 12px / 18px Consolas,monospace,serif;
+    color: #444;
+    -moz-tab-size: 4;
+    tab-size: 4;
+    font-size: 0.9rem;
+    padding: 20px;
+    border-radius: 5px;
+    margin: -2px 0 0 0;
+
+    span {
+      font-style: italic;
+      color: #998;
+    }
+  }
+}
+
+.quickstart__lang--active {
+  opacity: 1;
+  border-bottom: 2px solid #000;
+}
+
+.quickstart__t--active {
+  display: block;
+}
+
+.step {
+  display: flex;
+  margin-bottom: 20px;
+  background: #FFF;
+  border-radius: 5px;
+  padding: 25px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+
+  small {
+    color: #b1b1b1;
+  }
+}
+
+.step__last {
+  img {
+    margin: -20px -10px -20px 0;
+    width: 150px;
+  }
+}
+
+.step__number {
+  span {
+    display: block;
+    margin: 0 20px 0 0;
+    width: 17px;
+    height: 17px;
+    background: #FFF;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    text-align: center;
+    color: #FFF;
+    position: relative;
+  }
+}
+
+.step--active {
+  .step__number span {
+    background: #b3e8e2;
+    border-color: #09b3af;
+
+    &:after {
+      content: ' ';
+      display: block;
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      top: -7px;
+      left: -1px;
+      z-index: 1;
+      background: no-repeat url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI0MS43NjVweCIgaGVpZ2h0PSIzNy42NDdweCIgdmlld0JveD0iMCAwIDQxLjc2NSAzNy42NDciIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQxLjc2NSAzNy42NDciIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwb2x5Z29uIHBvaW50cz0iNC45NDQsMTguOTY4IDE1LjI2LDMzLjc3MSAzNi44NzUsNS42NzEgMTQuNTk2LDI0Ljg1MyAiLz48L3N2Zz4=);
+      background-size: 25px 25px;
+    }
+  }
+}
+
+.step__text {
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  -ms-flex-positive: 1;
+  min-width: 0px;
 }

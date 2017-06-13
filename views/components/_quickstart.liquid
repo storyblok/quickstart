@@ -1,119 +1,208 @@
-<div class="container container--small container--padded">
-  <h1>Congratulation, you created a Storyblok project!</h1>
+<div class="quickstart">
+  <div class="quickstart__bg">
+    <div class="quickstart__container">
+      <h1>Let's build a page</h1>
 
-  <p class="u__mb">
-    For maximum flexibility, Storyblok can be integrated into your application or website retrieving content from our API. But for those who want a hosted website, we offer a rendering service which this page is using.
-  </p>
+      <div class="step step--active">
+        <div class="step__number"><span></span></div>
+        <div class="step__text">
+          <h2>Create a space and a story</h2>
+          <p>
+            A space contains multiple stories (content entries) and a story is a <strong>page</strong> or <strong>content entry</strong> which contains components.
+          </p>
+        </div>
+        <div class="step__last">
+          <img src="//a.storyblok.com/f/40479/7a07f54a99/space.svg">
+        </div>
+      </div>
 
-  <h2 class="u__mb">What are the next steps?</h2>
+      <div class="step{% if story.content.body != blank %} step--active{% endif %}">
+        <div class="step__number"><span></span></div>
+        <div class="step__text">
+          <h2>Create a component and define its structure</h2>
+          <p>
+            Start the tour clicking "Add component" in the sidebar to beginn building your page.
+          </p>
+        </div>
+        <div class="step__last">
+          <img src="//a.storyblok.com/f/40479/9de132979f/story.svg">
+        </div>
+      </div>
 
-  <div class="step">
-    <div class="step__number"><span>1</span></div>
-    <div class="step__text">
-      <p>
-        <strong>Start our tour clicking "Add component" in the sidebar</strong><br>
-        You will learn how to create your first editable compontent.
-      </p>
+      <div class="step{% if story.content.body != blank %} step--active{% endif %}">
+        <div class="step__number"><span></span></div>
+        <div class="step__text">
+          <h2>Fetch and render the content</h2>
+
+          <p>You can choose the Storyblok hosted rendering service or call the API from your favourite language to get the created content.</p>
+
+          <div class="quickstart__langc">
+            <a class="quickstart__lang quickstart__lang--active" data-lang="storyblok">
+              <img src="https://a.storyblok.com/f/40479/52dd4927ef/storyblok_circle.svg" height="33">
+              <span>Storyblok</span>
+            </a>
+            <a class="quickstart__lang" data-lang="ruby">
+              <img src="https://a.storyblok.com/f/40479/5b972f6821/ruby.svg" height="33">
+              <span>Ruby</span>
+            </a>
+            <a class="quickstart__lang" data-lang="javascript">
+              <img src="https://a.storyblok.com/f/40479/9a6bef0cd2/javascript.svg" height="33">
+              <span>JavaScript</span>
+            </a>
+            <a class="quickstart__lang" data-lang="nodejs">
+              <img src="https://a.storyblok.com/f/40479/600c85c25b/node.svg" height="33">
+              <span>Node.js</span>
+            </a>
+            <a class="quickstart__lang" data-lang="php">
+              <img src="https://a.storyblok.com/f/40479/dac5c0bb11/php.svg" height="33">
+              <span>PHP</span>
+            </a>
+            <a class="quickstart__lang" data-lang="python">
+              <img src="https://a.storyblok.com/f/40479/71495561c6/python.svg" height="33">
+              <span>Python</span>
+            </a>
+          </div>
+
+          <div class="quickstart__t quickstart__t--active" data-tab="storyblok">
+            <pre><code>{%- raw -%}<span># Get the content of the current page</span>
+{{ story.content }}
+
+<span># Get multiple content entries from a folder called "news"</span>
+{% set newsitems from stories starts_with:'news', per_page: 3 %}
+{% for news in newsitems.data %}
+    {{ news }}
+{% endfor %}
+
+<span># Open the file views/page.liquid and try it out</span>
+<span># More on <a target="_blank" href="https://www.storyblok.com/docs/Rendering-Service/Theme-Documentation">theme documentation</a></span>
+{% endraw %}</code></pre>
+          </div>
+
+          <div class="quickstart__t" data-tab="ruby">
+            <pre><code>{%- raw -%}client = new Storyblok::Client(token: 'YOUR_PRIVATE_ACCESS_TOKEN')
+
+<span># Get the content of the current page</span>
+p client.story('home')
+
+<span># Get multiple content entries from a folder called "news"</span>
+p client.stories({
+  :starts_with => 'news'
+})
+
+<span># More on <a target="_blank" href="https://github.com/storyblok/storyblok-ruby">Github</a></span>{% endraw %}</code></pre>
+          </div>
+
+          <div class="quickstart__t" data-tab="javascript">
+            <pre><code>{%- raw -%}&lt;script src="//app.storyblok.com/f/storyblok-latest.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  storyblok.init({
+    accessToken: 'YOUR_PRIVATE_ACCESS_TOKEN'
+  })
+
+  <span>&lt;!-- Get the content of the current page --&gt;</span>
+  storyblok.get({slug: 'home', version: 'draft'}, function(data) {
+    console.log(data.story)
+  })
+
+  <span>&lt;!-- Get multiple content entries from a folder called "news" --&gt;</span>
+  storyblok.getAll({starts_with: 'story', version: 'draft'}, function(data) {
+    console.log(data.stories)
+  })
+&lt;/script&gt;{% endraw %}
+
+<span># More on <a target="_blank" href="https://www.storyblok.com/tp/add-a-headless-CMS-to-vuejs-in-5-minutes">our Blog</a></span></code></pre>
+          </div>
+
+          <div class="quickstart__t" data-tab="nodejs">
+            <pre><code>{%- raw -%}var StoryblokClient = require('storyblok-node-client');
+
+var Storyblok = new StoryblokClient({
+  privateToken: 'YOUR_PRIVATE_ACCESS_TOKEN'
+});
+
+<span>// Get the content of the current page</span>
+Storyblok
+  .get('stories/home', {
+    version: 'draft'
+  })
+  .then((response) => {
+    console.log(response);
+  });
+
+<span>// Get multiple content entries from a folder called "news"</span>
+Storyblok
+  .get('stories', {
+    starts_with: 'news'
+    version: 'draft'
+  })
+  .then((response) => {
+    console.log(response);
+  });
+{% endraw %}
+
+<span># More on <a target="_blank" href="https://github.com/storyblok/storyblok-node-client">Github</a></span></code></pre>
+          </div>
+
+          <div class="quickstart__t" data-tab="php">
+            <pre><code>{%- raw -%}require 'vendor/autoload.php';
+
+$client = new \Storyblok\Client('YOUR_PRIVATE_ACCESS_TOKEN');
+
+<span>// Get the content of the current page</span>
+$client->getStoryBySlug('home');
+$data = $client->getBody();
+
+<span>// Get multiple content entries from a folder called "news"</span>
+$client->getStories(
+  array(
+    'starts_with' => 'news'
+  )
+);
+$data = $client->getStoryContent();{% endraw %}
+
+<span># More on <a target="_blank" href="https://github.com/storyblok/php-client">Github</a></span></code></pre>
+          </div>
+
+          <div class="quickstart__t" data-tab="python">
+            <pre><code>{%- raw -%}import http.client
+
+conn = http.client.HTTPSConnection("api.storyblok.com")
+
+<span>// Get the content of the current page</span>
+conn.request("GET", "/v1/cdn/stories/home?token=YOUR_PRIVATE_ACCESS_TOKEN")
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8")){% endraw %}</code></pre>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="quickstart__hint">
+        Hint: Remove {% raw %}{% include 'quickstart' %}{% endraw %} from page.liquid to remove the quickstart instructions.
+      </div>
     </div>
   </div>
-
-  <div class="step">
-    <div class="step__number"><span>2</span></div>
-    <div class="step__text">
-      <p>
-        <strong>Repeat Step 1 until you have created your personal set of components</strong><br>
-        For most Web-Project you will need components like grid, column, headline, hero, ...
-        Be sure to create the component files like _grid.liquid, _column.liquid, ... in views/components before
-        creating the schema-definition of them.
-        <br>
-        <small>Tip: Define bigger components if you want to give less control of the design
-        to the editor and define smaller components if the editor has good design knowledge.</small>
-      </p>
-    </div>
-  </div>
-
-  <div class="step">
-    <div class="step__number"><span>3</span></div>
-    <div class="step__text">
-      <p>
-        <strong>Optionally customize the project to your needs:</strong><br>
-        If you you prefer LESS instead of SCSS or Typescript instead of Babel you can change
-        the configuration in gulpfile.babel.js
-      </p>
-    </div>
-  </div>
-
-  <h2 class="u__mt">Theme Documentation</h2>
-
-  <p>
-    The templates of the Storyblok rendering service are based on Liquid.
-    <a target="_blank" href="https://www.storyblok.com/docs/Rendering-Service/Theme-Documentation">Go to the theme documentation</a>.<br>
-    If you don't want to use Liquid you can choose from one of our <a target="_blank" href="https://github.com/search?q=topic%3Aboilerplate+org%3Astoryblok+fork%3Atrue">self-hosted Boilerplates</a> or integrate Storyblok in your existing project.
-  </p>
-
-  <h2 class="u__mt">Folder Structure of this Project</h2>
-
-  <p>
-    This project is highly optimized for pagespeed and uses best practices to achieve a score of nearly 100 points.
-    To acheive this we splitted the SCSS files in two parts.
-  </p>
-
-  <ul>
-    <li>
-      <strong>/source/scss/above</strong><br>
-      SCSS files for the above the fold stylings of components
-    </li>
-    <li>
-      <strong>/source/scss/elements</strong><br>
-      SCSS files for the above the fold stylings of HTML elements
-    </li>
-    <li>
-      <strong>/source/scss/below</strong><br>
-      SCSS files for the below the fold stylings of components
-    </li>
-    <li>
-      <strong>/source/js</strong><br>
-      The Javascript files. The entry point for your scripts is scripts.js which is bundled by webpack by default
-    </li>
-    <li>
-      <strong>/views/</strong><br>
-      In view you can find the template files and bundled assets. All the files in views are getting uploaded to the Storyblok rendering engine.
-    </li>
-    <li>
-      <strong>/views/components</strong><br>
-      Here you can find your html components.
-    </li>
-    <li>
-      <strong>/config.js</strong>
-      In this file you can see the space configuration and also disable the tour for further development.
-    </li>
-  </ul>
-
-  <h2 class="u__mt">Don't want to use liquid?</h2>
-
-  <p>
-    Integrate Storyblok in your favorite platform. Get started selecting one of our boilerplates:
-  </p>
-
-  <div class="quickstart__platforms">
-    <a target="_blank" href="https://github.com/storyblok/vuejs-boilerplate"><img src="{{ '//a.storyblok.com/f/39898/a88960cb19/vuejs.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://www.storyblok.com/docs/Delivery-Api/introduction"><img src="{{ '//a.storyblok.com/f/39898/2ab6d81de3/swift.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://github.com/storyblok/silex-boilerplate"><img src="{{ '//a.storyblok.com/f/39898/6f87b4037c/silex.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://github.com/storyblok/storyblok-ruby"><img src="{{ '//a.storyblok.com/f/39898/11d8a92a36/rubyonrails.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://github.com/storyblok/storyblok-ruby"><img src="{{ '//a.storyblok.com/f/39898/7c8dd42e6e/ruby.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://github.com/storyblok/django-boilerplate"><img src="{{ '//a.storyblok.com/f/39898/57e50f834b/python.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://github.com/storyblok/php-client"><img src="{{ '//a.storyblok.com/f/39898/3f11d2a315/php.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://www.storyblok.com/docs/Delivery-Api/introduction"><img src="{{ '//a.storyblok.com/f/39898/812d98d62a/objective-c.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://github.com/storyblok/nodejs-boilerplate"><img src="{{ '//a.storyblok.com/f/39898/056177777f/nodejs.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://github.com/storyblok/creator-theme"><img src="{{ '//a.storyblok.com/f/39898/9e7c5f5f49/liquid.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://www.storyblok.com/tp/add-a-headless-cms-to-laravel-in-5-minutes"><img src="{{ '//a.storyblok.com/f/39898/0442f6bac9/laravel.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://www.storyblok.com/docs/Delivery-Api/introduction"><img src="{{ '//a.storyblok.com/f/39898/e7d0405fa4/javascript.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://github.com/storyblok/three-minutes-demo"><img src="{{ '//a.storyblok.com/f/39898/e3552622bb/handlebars.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://github.com/storyblok/django-boilerplate"><img src="{{ '//a.storyblok.com/f/39898/37c66a888b/django.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://www.storyblok.com/docs/Guides/command-line-interface"><img src="{{ '//a.storyblok.com/f/39898/b310d170d5/console.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://www.storyblok.com/docs/Delivery-Api/introduction"><img src="{{ '//a.storyblok.com/f/39898/b23c9cbda3/c.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://github.com/thomaspink/ng-storyblok"><img src="{{ '//a.storyblok.com/f/39898/944271e45e/angular.png' | resize:'50x50' }}"></a>
-    <a target="_blank" href="https://github.com/mikepenz/Storyblok-Android-SDK"><img src="{{ '//a.storyblok.com/f/39898/d8db0263c7/android.png' | resize:'50x50' }}"></a>
-  </div>
-
 </div>
+
+<script type="text/javascript">
+  var qs = document.querySelectorAll('.quickstart__lang')
+
+  for (var i = 0; i < qs.length; i++) {
+    qs[i].addEventListener('click', function() {
+      var qtabs = document.querySelectorAll('.quickstart__t')
+      for (var j = 0; j < qtabs.length; j++) {
+        qtabs[j].style.display = 'none'
+      }
+
+      for (var x = 0; x < qs.length; x++) {
+        qs[x].classList = 'quickstart__lang'
+      }
+
+      this.classList = 'quickstart__lang quickstart__lang--active'
+      document.querySelector('[data-tab='+this.getAttribute('data-lang')+']').style.display = 'block'
+    })
+  }
+</script>

@@ -17,37 +17,14 @@
   <link rel="preload" id="stylesheet" href="{{ 'assets/css/below.css' | asset_url }}" as="style" onload="this.rel='stylesheet'">
 </head>
 <body>
-  {% spaceless %}
-
   {% include 'icon' %}
-
-  <a class="u__vis-hidden" href="#main">Skip to main content</a>
-
-  <header class="header">
-    <div class="container header__container">
-      <div class="header__logo">
-        <svg class="icon"><use xlink:href="#icon-logo"></use></svg>
-        Quickstart
-      </div>
-
-      <nav class="header__nav" role="navigation">
-        <ul class="navbar">
-          <li><a href="/">Home</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
   <main id="main" role="main">
     {% include story.content.component with blok: story.content, title: story.name, date: story.created_at %}
     {% include 'quickstart' %}
   </main>
 
-  <footer>
-    <!-- Footer -->
-  </footer>
-
-  {% endspaceless %}
+  <script type="text/javascript" src="{{ 'assets/js/scripts.js' | asset_url }}"></script>
 
   {% if story.content._editable %}
     <script type="text/javascript" src="//app.storyblok.com/storyblok-latest.js"></script>
