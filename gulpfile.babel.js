@@ -50,6 +50,14 @@ gulp.task('styles:above', function () {
     .pipe(gulp.dest('./views/components/'))
 })
 
+gulp.task('styles:quickstart', function () {
+  return gulp.src('source/scss/quickstart.scss')
+    .pipe(sassGlob())
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(gulp.dest('./views/assets/css/'))
+    .pipe(browserSync.stream())
+})
+
 gulp.task('scripts', function () {
   return gulp.src('source/js/scripts.js')
     .pipe(gulpWebpack({
@@ -82,7 +90,7 @@ gulp.task('browsersync', function () {
     port: 4440,
     serveStatic: ['./views'],
     proxy: {
-      target: 'http://' + config.blok.domain + '/' + (config.blok.enableQuickstartTour ? '_quickstart?quickstart=' + config.blok.quickstartToken : ''),
+      target: 'http://' + config.blok.domain + '/_quickstart?quickstart=' + config.blok.quickstartToken,
       reqHeaders: function () {
         return {
           'accept-encoding': 'identity',
@@ -106,7 +114,7 @@ gulp.task('browsersync', function () {
 
   gulp.watch(['source/scss/_variables.scss'], ['styles:above', 'styles:below'])
   gulp.watch(['source/scss/above.scss', 'source/scss/components/above/**/*.scss', 'source/scss/components/elements/**/*.scss'], ['styles:above'])
-  gulp.watch(['source/scss/below.scss','source/scss/components/below/**/*.scss'], ['styles:below'])
+  gulp.watch(['source/scss/below.scss', 'source/scss/components/below/**/*.scss'], ['styles:below'])
   gulp.watch('source/js/**/*.js', ['scripts'])
 })
 
