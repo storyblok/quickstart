@@ -399,10 +399,10 @@ storyblok.init({
                   <pre><code>storyblok quickstart --space=<em>{{space.id}}</em></code></pre>
                 </div>
                 <p>
-                  To run your local environemnt we're using <a href="http://gulpjs.com/" target="_blank">gulp</a> - however, you can change and customize this to fullfil your own needs.
+                  The following command will open Storyblok with your local environment embedded in an iframe.
                 </p>
                 <div class="quickstart__t quickstart__t--borderless quickstart__t--active">
-                  <pre><code>cd ./<em data-slugify>{{space.name}}</em> && npm install && gulp</code></pre>
+                  <pre><code>cd ./<em data-slugify>{{space.name}}</em> && npm install && npm run dev</code></pre>
                 </div>
                 <p class="quickstart__muted">Tip: We will change your environment to Dev - so your local instance will be displayed in this frame. You can switch between environments in the left bottom corner and add new in the space settings.</p>
               </div>
@@ -414,8 +414,8 @@ storyblok.init({
             <div class="step__text">
               <h2>Last step: Let's create the teaser template</h2>
               <p>
-                Create the file <code>_teaser.liquid</code>
-                in your <code>/views/components/</code> folder and fill it with following content:
+                Open your project folder - <em data-slugify>{{space.name}}</em> - in your favourite editor.
+                Create the file <code>/views/components/_teaser.liquid</code> and fill it with following content:
               </p>
               <div class="quickstart__t quickstart__t--borderless quickstart__t--active">
                 <pre><code>{% raw %}&lt;div class=&quot;quickstart__teaser&quot;&gt;
@@ -459,6 +459,297 @@ storyblok.init({
 
   ga('create', 'UA-90566930-3', 'auto');
   ga('send', 'pageview');
+
+  // pretty print on load
+  window.onload = function () {
+    window.window.currentStory = gup('_storyblok', window.location.href) + '-';
+    initBtnToggle();
+    initPrettyPrint();
+    initSlugify();
+    initTrackButton();
+    initStartTourButtons();
+    initLiveChat();
+    initShowButton();
+
+    initFirstAPICall();
+    initSecondAPICall();
+
+    initRenderingService();
+    initTeaserState();
+
+    initApiSdkBoilerplates();
+    initAPIHowtos();
+
+    checkSteps();
+  };
+
+  var hasClass = function hasClass(el, className) {
+    return el.classList ? el.classList.contains(className) : new RegExp('\\b' + className + '\\b').test(el.className);
+  };
+
+  function initBtnToggle() {
+    var toggle = document.querySelectorAll('.step__toggle-btn');
+    for (var i = 0; i < toggle.length; i++) {
+      toggle[i].addEventListener('click', function (event) {
+        var step = event.currentTarget.closest('.step');
+
+        if (hasClass(step, 'step--toggle')) {
+          step.classList.remove('step--toggle');
+        } else {
+          step.classList.add('step--toggle');
+        }
+      });
+    }
+  }
+
+  function initTrackButton() {
+    var trackButtons = document.querySelectorAll('[data-track]');
+    for (var index = 0, max = trackButtons.length; index < max; index++) {
+      var trackButton = trackButtons[index];
+      trackButton.addEventListener('click', function (event) {
+        var toTrack = trackButton.getAttribute('data-track');
+        ga('send', 'event', 'Button', toTrack, 'quickstart-v2');
+      });
+    }
+  }
+
+  function initShowButton() {
+    var showButtons = document.querySelectorAll('[data-show]');
+    for (var index = 0, max = showButtons.length; index < max; index++) {
+      var showButton = showButtons[index];
+      showButton.addEventListener('click', function (event) {
+        var toShowId = showButton.getAttribute('data-show');
+        showButton.classList.add('quickstart--hidden');
+        var element = document.querySelector(toShowId);
+        element.classList.remove('quickstart--hidden');
+      });
+    }
+  }
+
+  function initLiveChat() {
+    var buttons = document.querySelectorAll('[data-trigger-livechat]');
+    for (var index = 0, max = buttons.length; index < max; index++) {
+      var button = buttons[index];
+      if (button) {
+        button.addEventListener('click', function () {
+          if (window.storyblok) {
+            window.storyblok.openLiveChat();
+          }
+        });
+      }
+    }
+  }
+
+  function initStartTourButtons() {
+    var startTourButtons = document.querySelector('[data-start-tour]');
+    if (startTourButtons) {
+      startTourButtons.addEventListener('click', function () {
+        if (window.storyblok) {
+          window.storyblok.startTour();
+        }
+      });
+    }
+  }
+
+  function initFirstAPICall() {
+    var button = document.querySelector('[data-first-api]');
+    if (button) {
+      button.addEventListener('click', function () {
+        localStorage.setItem(window.currentStory + 'step-first-api', 'true');
+        doFirstAPICall();
+      });
+    }
+  }
+
+  function doFirstAPICall() {
+    var toShow = document.querySelector('#first-api');
+    if (toShow) {
+      toShow.classList.remove('quickstart--hidden');
+      var button = document.querySelector('[data-first-api]');
+      if (button) {
+        var step = findAncestor(button, 'step');
+        step.classList.add('step--active');
+      }
+    }
+  }
+
+  function initSecondAPICall() {
+    var button = document.querySelector('[data-second-api]');
+    if (button) {
+      button.addEventListener('click', function () {
+        localStorage.setItem(window.currentStory + 'step-second-api', 'true');
+        doSecondAPICall();
+      });
+    }
+  }
+  function doSecondAPICall() {
+    var toShow = document.querySelector('#second-api');
+    if (toShow) {
+      toShow.classList.remove('quickstart--hidden');
+      var button = document.querySelector('[data-second-api]');
+      if (button) {
+        var step = findAncestor(button, 'step');
+        step.classList.add('step--active');
+      }
+    }
+  }
+
+  function initRenderingService() {
+    var button = document.querySelector('[data-rendering-service]');
+    if (!!button) {
+      button.addEventListener('click', function () {
+        localStorage.setItem(window.currentStory + 'step-rendering-service', 'true');
+        localStorage.setItem(window.currentStory + 'step-api-sdk-boilerplates', 'false');
+
+        window.scrollIntoViewPolyfill();
+        setTimeout(function () {
+          document.querySelector('.step__5').scrollIntoView({ behavior: 'smooth' });
+        }, 0);
+
+        doRenderingService();
+      });
+    }
+  }
+  function doRenderingService() {
+    var toShow = document.querySelector('#rendering-service');
+    if (!!toShow) {
+      toShow.classList.add('quickstart--show');
+      document.querySelector('#api-sdk-boilerplates').classList.remove('quickstart--show');
+
+      var step = findAncestor(document.querySelector('[data-rendering-service]'), 'step');
+      step.classList.add('step--active');
+    }
+  }
+
+  function initApiSdkBoilerplates() {
+    var button = document.querySelector('[data-api-sdk-boilerplates]');
+    if (!!button) {
+      button.addEventListener('click', function () {
+        localStorage.setItem(window.currentStory + 'step-rendering-service', 'false');
+        localStorage.setItem(window.currentStory + 'step-api-sdk-boilerplates', 'true');
+
+        window.scrollIntoViewPolyfill();
+        setTimeout(function () {
+          document.querySelector('.step__5').scrollIntoView({ behavior: 'smooth' });
+        }, 0);
+        doApiSdkBoilerplates();
+      });
+    }
+  }
+  function doApiSdkBoilerplates() {
+    var toShow = document.querySelector('#api-sdk-boilerplates');
+    if (!!toShow) {
+      toShow.classList.add('quickstart--show');
+      document.querySelector('#rendering-service').classList.remove('quickstart--show');
+
+      var step = findAncestor(document.querySelector('[data-api-sdk-boilerplates]'), 'step');
+      step.classList.add('step--active');
+    }
+  }
+
+  function initTeaserState() {
+    var teaser = document.querySelector('.quickstart__teaser');
+    if (!!teaser) {
+      document.querySelector('.step--teaser-creation').classList.add('step--active');
+    }
+  }
+
+  function checkSteps() {
+    if (localStorage.getItem(window.currentStory + 'step-first-api') == 'true') {
+      doFirstAPICall();
+    }
+    if (localStorage.getItem(window.currentStory + 'step-second-api') == 'true') {
+      doSecondAPICall();
+    }
+    if (localStorage.getItem(window.currentStory + 'step-rendering-service') == 'true') {
+      doRenderingService();
+    }
+    if (localStorage.getItem(window.currentStory + 'step-api-sdk-boilerplates') == 'true') {
+      doApiSdkBoilerplates();
+    }
+    if (localStorage.getItem(window.currentStory + 'step-api-sdk-boilerplates-got-it') == 'true') {
+      doApiSdkBoilerplateGotIt();
+    }
+  }
+
+  function initAPIHowtos() {
+    var qs = document.querySelectorAll('.quickstart__lang');
+    var ct = document.querySelector('.step--choose-tech');
+
+    for (var i = 0; i < qs.length; i++) {
+      qs[i].addEventListener('click', function (e) {
+        var qtabs = ct.querySelectorAll('.quickstart__t');
+
+        for (var j = 0; j < qtabs.length; j++) {
+          qtabs[j].style.display = 'none';
+        }
+
+        for (var x = 0; x < qs.length; x++) {
+          qs[x].classList = 'quickstart__lang';
+        }
+
+        this.classList = 'quickstart__lang quickstart__lang--active';
+        console.log(document.querySelector('[data-tab=' + e.currentTarget.getAttribute('data-lang') + ']'));
+        document.querySelector('[data-tab=' + e.currentTarget.getAttribute('data-lang') + ']').style.display = 'block';
+      });
+    }
+  }
+
+  function initPrettyPrint() {
+    var toPrettyPrint = document.querySelectorAll('[data-pretty]');
+    for (var index = 0, max = toPrettyPrint.length; index < max; index++) {
+      var element = toPrettyPrint[index];
+      var json = JSON.parse(element.innerHTML);
+      clearStory(json);
+
+      if (!!element.getAttribute('data-skip-body')) {
+        json.content.body = [];
+        json = JSON.stringify(json, null, 2);
+      } else {
+        json = JSON.stringify(json, null, 2);
+        json = json.replace('"body": [', '"body": [<em>');
+        json = json.replace('],\n    "component": "root"', '</em>],\n    "component": "root"');
+      }
+
+      json = json.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+      json = json.replace('&lt;em&gt;', '<em>').replace('&lt;\/em&gt;', '</em>');
+      element.innerHTML = json;
+    }
+  }
+
+  function initSlugify() {
+    var toSlugify = document.querySelectorAll('[data-slugify]');
+    for (var index = 0, max = toSlugify.length; index < max; index++) {
+      var element = toSlugify[index];
+      element.innerHTML = element.innerHTML.replace(/\s+/g, '-').toLowerCase();
+    }
+  }
+
+  function findAncestor(el, cls) {
+    while ((el = el.parentElement) && !el.classList.contains(cls)) {}
+    return el;
+  }
+
+  function clearStory(story) {
+    delete story.alternates;
+    delete story.tag_list;
+    delete story.sort_by_date;
+    delete story.is_startpage;
+    delete story.group_id;
+    delete story.parent_id;
+    delete story.content._editable;
+    return story;
+  }
+
+  function gup(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
 
   var teaser = document.querySelector('.quickstart__teaser');
 
