@@ -481,6 +481,7 @@ storyblok.init({
     initAPIHowtos();
 
     checkSteps();
+
   };
 
   var hasClass = function hasClass(el, className) {
@@ -571,6 +572,7 @@ storyblok.init({
         step.classList.add('step--active');
       }
     }
+    updateSteps()
   }
 
   function initSecondAPICall() {
@@ -592,6 +594,7 @@ storyblok.init({
         step.classList.add('step--active');
       }
     }
+    updateSteps()
   }
 
   function initRenderingService() {
@@ -619,6 +622,7 @@ storyblok.init({
       var step = findAncestor(document.querySelector('[data-rendering-service]'), 'step');
       step.classList.add('step--active');
     }
+    updateSteps()
   }
 
   function initApiSdkBoilerplates() {
@@ -645,6 +649,7 @@ storyblok.init({
       var step = findAncestor(document.querySelector('[data-api-sdk-boilerplates]'), 'step');
       step.classList.add('step--active');
     }
+    updateSteps()
   }
 
   function initTeaserState() {
@@ -670,6 +675,10 @@ storyblok.init({
     if (localStorage.getItem(window.currentStory + 'step-api-sdk-boilerplates-got-it') == 'true') {
       doApiSdkBoilerplateGotIt();
     }
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+      document.querySelector('#rendering-service .step')[0].classList.remove('step--toggle')
+    }
+    updateSteps();
   }
 
   function initAPIHowtos() {
@@ -757,6 +766,16 @@ storyblok.init({
     var quickstart = document.querySelector('.quickstart');
     if (quickstart) {
       quickstart.style.display = 'none';
+    }
+  }
+
+  function updateSteps() {
+    var steps = document.querySelectorAll('.step')
+    for (var index = 0, max = steps.length; index < max; index++) {
+      var step = steps[index];
+      if(!step.classList.contains('step--active') && index > 0 && steps[index - 1].classList.contains('step--active')) {
+        step.classList.add('step--toggle')
+      }
     }
   }
 
