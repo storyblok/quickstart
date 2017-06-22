@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <div class="step {% if story.content.body != blank %} step--active {% endif %}">
+      <div class="step {% if story.content.body != blank %} step--active {% endif %} {% if proxy_mode %}step--active{% endif %}">
         <div class="step__number"><span></span></div>
         <div class="step__text">
           <h2 class="step__toggle-btn">2. Your first API Request</h2>
@@ -69,7 +69,7 @@
         </div>
       </div>
 
-      <div class="step {% if story.content.body != blank %} step--active {% endif %}">
+      <div class="step {% if story.content.body != blank %} step--active {% endif %} {% if proxy_mode %}step--active{% endif %}">
         <div class="step__number"><span></span></div>
         <div class="step__text">
           <h2 class="step__toggle-btn">3. Create a component and define its structure</h2>
