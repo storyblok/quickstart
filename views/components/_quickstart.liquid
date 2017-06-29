@@ -31,7 +31,7 @@
       {% endif %}
 
       <div class="step step--active">
-        <div class="step__number"><span></span></div>
+        <div class="step__number step__toggle-btn"><span></span></div>
         <div class="step__text">
           <h2 class="step__toggle-btn">1. Create a space and a story</h2>
           <p class="step__toogle">
@@ -44,7 +44,7 @@
       </div>
 
       <div class="step {% if story.content.body != blank %} step--active {% endif %} {% if proxy_mode %}step--active{% endif %}">
-        <div class="step__number"><span></span></div>
+        <div class="step__number step__toggle-btn"><span></span></div>
         <div class="step__text">
           <h2 class="step__toggle-btn">2. Your first API Request</h2>
           <div class="step__toogle">
@@ -70,7 +70,7 @@
       </div>
 
       <div class="step {% if story.content.body != blank %} step--active {% endif %} {% if proxy_mode %}step--active{% endif %}">
-        <div class="step__number"><span></span></div>
+        <div class="step__number step__toggle-btn"><span></span></div>
         <div class="step__text">
           <h2 class="step__toggle-btn">3. Create a component and define its structure</h2>
           <div class="step__toogle">
@@ -91,7 +91,7 @@
       </div>
 
       <div class="step {% if proxy_mode %}step--active{% endif %}">
-        <div class="step__number"><span></span></div>
+        <div class="step__number step__toggle-btn"><span></span></div>
         <div class="step__text">
           <h2 class="step__toggle-btn">4. Check what has changed</h2>
           <div class="step__toogle">
@@ -118,7 +118,7 @@
       </div>
 
       <div class="step {% if proxy_mode %}step--active{% endif %}">
-        <div class="step__number"><span></span></div>
+        <div class="step__number step__toggle-btn"><span></span></div>
         <div class="step__text">
           <h2 class="step__toggle-btn">5. Time to marry the data with a view</h2>
           <div class="step__toogle">
@@ -204,7 +204,7 @@
 
       <div id="api-sdk-boilerplates" style="display: none;">
         <div class="step">
-        <div class="step__number"><span></span></div>
+        <div class="step__number step__toggle-btn"><span></span></div>
         <div class="step__text">
           <h2>Integrate Storyblok to your project</h2>
 
@@ -381,71 +381,50 @@ storyblok.init({
       </div>
 
       <div id="rendering-service" {% if proxy_mode %}class="quickstart--show"{% endif %} style="display: none;">
-          <div class="step{% if proxy_mode %} step--active{% endif %}">
-            <div class="step__number"><span></span></div>
-            <div class="step__text">
-              <h2 class="step__toggle-btn">Fire up your local environment.</h2>
-              <div class="step__toogle">
-                <p>
-                  With the Storyblok CLI, you can start projects with one command on your terminal - no manual configuration needed. If you don't have the CLI you can install it like this:
-                </p>
-                <div class="quickstart__t quickstart__t--borderless quickstart__t--active">
-                  <pre><code>npm install -g storyblok</code></pre>
-                </div>
-                <p>
-                  Run the following command wherever you want your local development in your local files to be.
-                </p>
-                <div class="quickstart__t quickstart__t--borderless quickstart__t--active">
-                  <pre><code>storyblok quickstart --space=<em>{{space.id}}</em></code></pre>
-                </div>
-                <p>
-                  The following command will open Storyblok with your local environment embedded in an iframe.
-                </p>
-                <div class="quickstart__t quickstart__t--borderless quickstart__t--active">
-                  <pre><code>cd ./<em data-slugify>{{space.name}}</em> && npm install && npm run dev</code></pre>
-                </div>
-                <p class="quickstart__muted">Tip: We will change your environment to Dev - so your local instance will be displayed in this frame. You can switch between environments in the left bottom corner and add new in the space settings.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="step step--teaser-creation">
-            <div class="step__number"><span></span></div>
-            <div class="step__text">
-              <h2>Last step: Let's create the teaser template</h2>
+        <div class="step step--toggle{% if proxy_mode %} step--active{% endif %}">
+          <div class="step__number step__toggle-btn"><span></span></div>
+          <div class="step__text">
+            <h2 class="step__toggle-btn">Fire up your local environment.</h2>
+            <div class="step__toogle">
               <p>
-                Open your project folder - <em data-slugify>{{space.name}}</em> - in your favourite editor.
-                Create the file <code>/views/components/_teaser.liquid</code> and fill it with following content:
+                With the Storyblok CLI, you can start projects with one command on your terminal - no manual configuration needed. If you don't have the CLI you can install it like this:
               </p>
               <div class="quickstart__t quickstart__t--borderless quickstart__t--active">
-                <pre><code>{% raw %}&lt;div class=&quot;quickstart__teaser&quot;&gt;
-  &lt;!--
-  The _editable attribute makes the next
-  DOM-element clickable so the sidebar can
-  show the right component.
-  --&gt;
-  {{ blok._editable }}
-  &lt;div class=&quot;quickstart__inner-teaser&quot;&gt;
-    &lt;svg class=&quot;icon&quot;&gt;&lt;use xlink:href=&quot;#icon-congrats&quot;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;h2&gt;
-      &lt;!--
-      You can access every attribute you
-      define in the schema in the blok variable
-      --&gt;
-      {{ blok.headline }}
-      &lt;/h2&gt;
-      &lt;h3&gt;
-        Congrats, you have created the teaser template!&lt;br&gt;
-        &lt;a target="_blank" href="https://www.storyblok.com/docs/Rendering-Service/Theme-Documentation"&gt;
-          Read the theme documentation
-        &lt;/a&gt;
-        &lt;!-- HINT: Try to change something and the browser window in Storyblok will automatically refresh. --&gt;
-    &lt;/h3&gt;
-  &lt;/div&gt;
-&lt;/div&gt;{% endraw %}</code></pre>
+                <pre><code>$ npm install -g storyblok</code></pre>
               </div>
+              <p>
+                Run the following command wherever you want your local development in your local files to be.
+              </p>
+              <div class="quickstart__t quickstart__t--borderless quickstart__t--active">
+                <pre><code>$ storyblok quickstart --space=<em>{{space.id}}</em></code></pre>
+              </div>
+              <p>
+                The following command will open Storyblok with your local environment embedded in an iframe.
+              </p>
+              <div class="quickstart__t quickstart__t--borderless quickstart__t--active">
+                <pre><code>$ cd ./<em data-slugify>{{space.name}}</em> && npm install && npm run dev</code></pre>
+              </div>
+              <p class="quickstart__muted">Tip: We will change your environment to Dev - so your local instance will be displayed in this frame. You can switch between environments in the left bottom corner and add new in the space settings.</p>
             </div>
           </div>
+        </div>
+
+        <div class="step step--teaser-creation">
+          <div class="step__number"><span></span></div>
+          <div class="step__text">
+            <h2>Last step: Let's create the teaser template</h2>
+            <p>
+              Open a <strong>NEW tab</strong> in your terminal and use the scaffold command to create the file <code>/views/components/_teaser.liquid</code> in your project folder <em data-slugify>{{space.name}}</em> on your computer.
+            </p>
+            <div class="quickstart__t quickstart__t--borderless quickstart__t--active">
+              <pre><code>$ storyblok scaffold teaser</code></pre>
+            </div>
+            <p class="quickstart__p">
+              This is how it should look like. Notice that we opened a second tab to keep gulp running in the background:
+            </p>
+            <img style="width: 100%;" src="https://a.storyblok.com/f/39898/5d294f5633/screen-1.gif" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -462,7 +441,7 @@ storyblok.init({
 
   // pretty print on load
   window.onload = function () {
-    window.window.currentStory = gup('_storyblok', window.location.href) + '-';
+    window.currentStory = gup('_storyblok', window.location.href) + '-';
     initBtnToggle();
     initPrettyPrint();
     initSlugify();
@@ -676,7 +655,7 @@ storyblok.init({
       doApiSdkBoilerplateGotIt();
     }
     if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-      document.querySelector('#rendering-service .step')[0].classList.remove('step--toggle')
+      document.querySelector('#rendering-service .step').classList.remove('step--toggle')
     }
     updateSteps();
   }
@@ -698,7 +677,6 @@ storyblok.init({
         }
 
         this.classList = 'quickstart__lang quickstart__lang--active';
-        console.log(document.querySelector('[data-tab=' + e.currentTarget.getAttribute('data-lang') + ']'));
         document.querySelector('[data-tab=' + e.currentTarget.getAttribute('data-lang') + ']').style.display = 'block';
       });
     }
