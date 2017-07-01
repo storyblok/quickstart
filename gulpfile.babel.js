@@ -100,16 +100,10 @@ gulp.task('browsersync', function () {
         }
       }
     },
-    reloadDelay: 1000,
+    reloadDelay: 500,
     notify: true,
     open: true,
     logLevel: 'silent'
-  })
-
-  gulp.watch('views/**/*.liquid').on('change', function (e) {
-    if (e.path.indexOf('_above_fold_css.liquid') <= -1) {
-      reload()
-    }
   })
 
   gulp.watch(['source/scss/_variables.scss'], ['styles:above', 'styles:below'])
