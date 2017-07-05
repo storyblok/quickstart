@@ -9,7 +9,10 @@
     ]
   },
   "scripts": {
-    "dev": "./node_modules/gulp/bin/gulp.js"
+    "dev": "node ./node_modules/gulp/bin/gulp.js",
+    "build": "node ./node_modules/gulp/bin/gulp.js build",
+    "deploy:dev": "node ./node_modules/gulp/bin/gulp.js deploy:dev",
+    "deploy:live": "node ./node_modules/gulp/bin/gulp.js deploy:live"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",

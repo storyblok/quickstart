@@ -112,7 +112,9 @@ gulp.task('browsersync', function () {
   gulp.watch('source/js/**/*.js', ['scripts'])
 })
 
-gulp.task('default', ['styles:above', 'styles:below', 'scripts', 'browsersync'], function () {
+gulp.task('build', ['styles:above', 'styles:below', 'scripts']) 
+
+gulp.task('default', ['build', 'browsersync'], function () {
   return watch('./views/**/*')
     .pipe(blok(config.blok))
 })
