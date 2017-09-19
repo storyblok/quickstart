@@ -26,7 +26,7 @@ gulp.task('deploy:dev', function () {
 })
 
 gulp.task('deploy:live', function () {
-  config.environment = 'live'
+  config.blok.environment = 'live'
 
   return gulp.src('./views/**/*')
     .pipe(blok(config.blok))
