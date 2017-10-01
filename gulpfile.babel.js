@@ -18,6 +18,8 @@ if (config.blok.themeId == 'INSERT_SPACE_ID') {
 }
 
 gulp.task('templates:cleanup', function (cb) {
+  config.blok.environment = 'live'
+
   exec('storyblok delete-templates --space=' + config.blok.themeId + ' --env=' + config.blok.environment, function (err, stdout, stderr) {
     console.log(stdout)
     console.log(stderr)
