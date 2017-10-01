@@ -7,6 +7,7 @@ const browserSync = require('browser-sync')
 const reload = browserSync.reload
 const config = require('./config.js')
 const rename = require('gulp-rename')
+const exec = require('child_process').exec
 
 if (config.blok.domain == 'INSERT_YOUR_DOMAIN') {
   config.blok.domain = 'ac0e600a.me.storyblok.com'
@@ -15,6 +16,14 @@ if (config.blok.domain == 'INSERT_YOUR_DOMAIN') {
 if (config.blok.themeId == 'INSERT_SPACE_ID') {
   config.blok.themeId = '40288'
 }
+
+gulp.task('templates:cleanup', function (cb) {
+  exec('storyblok delete-templates --space=' + config.blok.themeId + ' --env=' + config.blok.environment, function (err, stdout, stderr) {
+    console.log(stdout)
+    console.log(stderr)
+    cb(err)
+  })
+})
 
 gulp.task('deploy:dev', function () {
   return gulp.src('./views/**/*')
