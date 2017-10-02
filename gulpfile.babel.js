@@ -4,13 +4,10 @@ const watch = require('gulp-watch')
 const sass = require('gulp-sass')
 const sassGlob = require('gulp-sass-glob')
 const browserSync = require('browser-sync')
-const source = require('vinyl-source-stream')
-const webpack = require('webpack')
-const gulpWebpack = require('gulp-webpack')
 const reload = browserSync.reload
 const config = require('./config.js')
-const fs = require('fs')
 const rename = require('gulp-rename')
+const exec = require('child_process').exec
 
 if (config.blok.domain == 'INSERT_YOUR_DOMAIN') {
   config.blok.domain = 'ac0e600a.me.storyblok.com'
@@ -19,6 +16,16 @@ if (config.blok.domain == 'INSERT_YOUR_DOMAIN') {
 if (config.blok.themeId == 'INSERT_SPACE_ID') {
   config.blok.themeId = '40288'
 }
+
+gulp.task('templates:cleanup', function (cb) {
+  config.blok.environment = 'live'
+
+  exec('storyblok delete-templates --space=' + config.blok.themeId + ' --env=' + config.blok.environment, function (err, stdout, stderr) {
+    console.log(stdout)
+    console.log(stderr)
+    cb(err)
+  })
+})
 
 gulp.task('deploy:dev', function () {
   return gulp.src('./views/**/*')
@@ -58,31 +65,9 @@ gulp.task('styles:quickstart', function () {
     .pipe(browserSync.stream())
 })
 
-gulp.task('scripts', function () {
-  return gulp.src('source/js/scripts.js')
-    .pipe(gulpWebpack({
-      output: {
-        filename: 'scripts.js',
-      },
-      module: {
-        loaders: [{
-          test: /\.js$/,
-          loader: 'babel-loader'
-        }]
-      },
-      plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-          compress: {
-            warnings: false,
-          },
-          output: {
-            comments: false,
-          }
-        })
-      ]
-    }, webpack))
-    .pipe(gulp.dest('views/assets/js'))
-    .pipe(browserSync.stream())
+gulp.task('vendor:scripts', function () {
+  return gulp.src('source/js/vendor/*')
+    .pipe(gulp.dest('views/assets/js/vendor'))
 })
 
 gulp.task('browsersync', function () {
@@ -109,10 +94,13 @@ gulp.task('browsersync', function () {
   gulp.watch(['source/scss/_variables.scss'], ['styles:above', 'styles:below'])
   gulp.watch(['source/scss/above.scss', 'source/scss/components/above/**/*.scss', 'source/scss/components/elements/**/*.scss'], ['styles:above'])
   gulp.watch(['source/scss/below.scss', 'source/scss/components/below/**/*.scss'], ['styles:below'])
-  gulp.watch('source/js/**/*.js', ['scripts'])
+  gulp.watch('source/js/vendor/*.js', ['vendor:scripts'])
+  gulp.watch('views/assets/js/**/*.js', function(event) {
+    browserSync.reload()
+  })
 })
 
-gulp.task('build', ['styles:above', 'styles:below', 'scripts']) 
+gulp.task('build', ['styles:above', 'styles:below'])
 
 gulp.task('default', ['build', 'browsersync'], function () {
   return watch('./views/**/*')
