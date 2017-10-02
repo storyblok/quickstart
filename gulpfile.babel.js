@@ -72,7 +72,8 @@ gulp.task('vendor:scripts', function () {
 })
 
 gulp.task('browsersync', function () {
-  portfinder.getPort({port: 4440}, function(port) {
+  portfinder.getPort({port: 4440}, function (err, port) {
+    console.log(port)
     if (port != 4440) {
       throw new Error('Address with port 4440 is already in use. Be sure to stop other services or Storyblok projects running on this port.')
     }
@@ -81,7 +82,7 @@ gulp.task('browsersync', function () {
       port: 4440,
       serveStatic: ['./views'],
       proxy: {
-        target: 'http://' + config.blok.domain,
+        target: 'http://' + config.blok.domain + '/_quickstart?quickstart=' + config.blok.quickstartToken,
         reqHeaders: function () {
           return {
             'accept-encoding': 'identity',
