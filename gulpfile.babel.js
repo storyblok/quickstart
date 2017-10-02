@@ -8,6 +8,7 @@ const reload = browserSync.reload
 const config = require('./config.js')
 const rename = require('gulp-rename')
 const exec = require('child_process').exec
+const portfinder = require('portfinder')
 
 if (config.blok.domain == 'INSERT_YOUR_DOMAIN') {
   config.blok.domain = 'ac0e600a.me.storyblok.com'
@@ -71,24 +72,30 @@ gulp.task('vendor:scripts', function () {
 })
 
 gulp.task('browsersync', function () {
-  browserSync({
-    port: 4440,
-    serveStatic: ['./views'],
-    proxy: {
-      target: 'http://' + config.blok.domain + '/_quickstart?quickstart=' + config.blok.quickstartToken,
-      reqHeaders: function () {
-        return {
-          'accept-encoding': 'identity',
-          'agent': false,
-          'browsersyncblok': true,
-          'storyblokenv': config.blok.environment
+  portfinder.getPort({port: 4440}, function(port) {
+    if (port != 4440) {
+      throw new Error('Address with port 4440 is already in use. Be sure to stop other services or Storyblok projects running on this port.')
+    }
+
+    browserSync({
+      port: 4440,
+      serveStatic: ['./views'],
+      proxy: {
+        target: 'http://' + config.blok.domain,
+        reqHeaders: function () {
+          return {
+            'accept-encoding': 'identity',
+            'agent': false,
+            'browsersyncblok': true,
+            'storyblokenv': config.blok.environment
+          }
         }
-      }
-    },
-    reloadDelay: 500,
-    notify: true,
-    open: true,
-    logLevel: 'silent'
+      },
+      reloadDelay: 500,
+      notify: true,
+      open: true,
+      logLevel: 'silent'
+    })
   })
 
   gulp.watch(['source/scss/_variables.scss'], ['styles:above', 'styles:below'])
