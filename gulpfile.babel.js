@@ -74,7 +74,7 @@ gulp.task('vendor:scripts', function () {
 gulp.task('browsersync', function () {
   portfinder.getPort({port: 4440}, function (err, port) {
 
-    console.log('Your project will be running on: 0.0.0.0:' + port)
+    console.log('Your project will be running on: localhost:' + port)
 
     if (port != 4440) {
       throw new Error('Address with port 4440 is already in use. Be sure to stop other services or Storyblok projects running on this port.')
