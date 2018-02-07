@@ -4,18 +4,24 @@
 <br><br>
 
 
-## Try it out!
+## Getting started
+
+After cloning this repo:
 
 ```
-# 1. Install the Storyblok CLI
-$ npm install storyblok -g
+# 1. Create a space in Storyblok and choose advanced settings to choose the option "Hosted/Rendering service" and then "Quickstart"
 
-# 2. Go through the quickstart
-$ storyblok quickstart
+# 2. Fill in the parameters YOUR_SPACE_ID and YOUR_DOMAIN config.js
 
-# 3. Fire up your dev environment
+# 3. Rename _token.js to token.js and insert your "theme" token (which you can find in the Storyblok dashboard).
+
+# 4. Fire up your dev environment
 $ cd ./project && npm i && npm run dev
+
+# 5. Add your dev environment 'http://localhost:4440/' to the environment settings
 ```
+
+<img style="margin: 20px 0;" src="https://a.storyblok.com/f/42225/2292x1278/a193038be7/quickstart.jpg" />
 
 ## Commands
 
@@ -36,7 +42,7 @@ $ npm run deploy:live
 
 ## Frequently Ask Questions
 
-#### How can I load stories to create an overview for (news|articles|projects|...): 
+#### How can I load stories to create an overview for (news|articles|projects|...):
 
 You can simply use following snippet to load all the stories from a specific folder according to the folder's slug like:
 

@@ -11,11 +11,11 @@ const exec = require('child_process').exec
 const portfinder = require('portfinder')
 
 if (config.blok.domain == 'INSERT_YOUR_DOMAIN') {
-  config.blok.domain = 'ac0e600a.me.storyblok.com'
+  config.blok.domain = 'fc147f74.me.storyblok.com'
 }
 
 if (config.blok.themeId == 'INSERT_SPACE_ID') {
-  config.blok.themeId = '40288'
+  config.blok.themeId = '40479'
 }
 
 gulp.task('templates:cleanup', function (cb) {
@@ -84,7 +84,7 @@ gulp.task('browsersync', function () {
       port: 4440,
       serveStatic: ['./views'],
       proxy: {
-        target: 'http://' + config.blok.domain + '/_quickstart?quickstart=' + config.blok.quickstartToken,
+        target: 'http://' + config.blok.domain + '/',
         reqHeaders: function () {
           return {
             'accept-encoding': 'identity',

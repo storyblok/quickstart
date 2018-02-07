@@ -15,33 +15,41 @@
 </head>
 <body>
 
-  <main id="main" role="main">
-    <!-- Here we include the root component -->
-    {% include story.content.component with blok: story.content, title: story.name, date: story.created_at %}
+  <main id="main" class="main" role="main">
+    <h1>Storyblok</h1>
 
-    <!-- REMOVE the following line when you are done with the quickstart -->
-    {% include 'quickstart' %}
+    <div>
+      You have successfully started the Storyblok rendering service.
+    </div>
+
+    <h2>How to start developing?</h2>
+
+    <ol class="main__quickstart">
+      <li>Create a space in Storyblok and choose advanced settings to choose the option "Hosted/Rendering service" and then "Quickstart"</li>
+      <li>Fill in the parameters YOUR_SPACE_ID and YOUR_DOMAIN config.js which you can find in the Storyblok dashboard</li>
+      <li>Rename _token.js to token.js and insert your "theme" token (which you can find in the Storyblok dashboard).</li>
+      <li>Restart your server with npm run dev</li>
+      <li>Add your dev environment 'http://localhost:4440/' to the environment settings</li>
+    </ol>
+
+    <img class="main__quickstartimg" src="https://a.storyblok.com/f/42225/2292x1278/a193038be7/quickstart.jpg" />
+
+    {% include story.content.component with blok: story.content, title: story.name, date: story.created_at %}
   </main>
 
   <script type="text/javascript" src="{{ 'assets/js/scripts.js' | asset_url }}"></script>
 
   {% if story.content._editable %}
-    <script type="text/javascript" src="//app.storyblok.com/storyblok-latest.js"></script>
+    <script type="text/javascript" src="//app.storyblok.com/f/storyblok-latest.js?t={{ public_token }}"></script>
     <script type="text/javascript">
 
-      storyblok.init({
-        accessToken: '{{ public_token }}'
-      });
-
       storyblok.on('change', function() {
-        location.reload(true);
-      });
+        location.reload(true)
+      })
 
-      storyblok.pingEditor(function() {
-        if (storyblok.inEditor) {
-          storyblok.enterEditmode();
-        }
-      });
+      storyblok.on('published', function() {
+        location.reload(true)
+      })
 
     </script>
   {% endif %}
