@@ -9,7 +9,7 @@
 After cloning this repo:
 
 1. Create a space in Storyblok and choose advanced settings to choose the option "Hosted/Rendering service" and then "Quickstart"
-2. Fill in the parameters YOUR_SPACE_ID and YOUR_DOMAIN config.js
+2. Fill in the parameters INSERT_SPACE_ID and INSERT_YOUR_DOMAIN config.js
 3. Rename _token.js to token.js and insert your "theme" token (which you can find in the Storyblok dashboard).
 4. Fire up your dev environment
 ```

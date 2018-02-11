@@ -1,1 +1,1 @@
-module.exports = "THEME_TOKEN"
+module.exports = "INSERT_TOKEN"
