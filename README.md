@@ -1,8 +1,8 @@
-<p align="center">
-  <h1 align="center">Quickstart for Storyblok</h1>
-</p>
-<br><br>
 
+> Find the New Version: https://github.com/storyblok/rendering-service
+
+
+# Deprecated: Quickstart for Rendering Service
 
 ## Getting started
 
